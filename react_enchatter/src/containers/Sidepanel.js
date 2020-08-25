@@ -87,16 +87,16 @@ class Sidepanel extends React.Component {
                 <div id="contacts">
                     <ul>{activeChats}</ul>
                 </div>
-                <div id="bottom-bar">
-                    <button id="addChat" onClick={() => this.openAddChatPopup()}>
-                        <i className="fa fa-user-plus fa-fw" aria-hidden="true"/>
-                        <span>Create chat</span>
-                    </button>
-                    <button id="settings">
-                        <i className="fa fa-cog fa-fw" aria-hidden="true"/>
-                        <span>Settings</span>
-                    </button>
-                </div>
+                {/*<div id="bottom-bar">*/}
+                    {/*<button id="addChat" onClick={() => this.openAddChatPopup()}>*/}
+                        {/*<i className="fa fa-user-plus fa-fw" aria-hidden="true"/>*/}
+                        {/*<span>Create chat</span>*/}
+                    {/*</button>*/}
+                    {/*<button id="settings">*/}
+                        {/*<i className="fa fa-cog fa-fw" aria-hidden="true"/>*/}
+                        {/*<span>Settings</span>*/}
+                    {/*</button>*/}
+                {/*</div>*/}
             </div>
         );
     }

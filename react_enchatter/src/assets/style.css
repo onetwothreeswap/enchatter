@@ -86,7 +86,7 @@ body {
   #frame #sidepanel #profile .wrap .circle {
     width: 60px;
     border-radius: 50%;
-    border: 2px solid #e74c3c;
+    /*border: 2px solid #e74c3c;*/
     height: auto;
     float: left;
     cursor: pointer;
@@ -604,7 +604,7 @@ body {
   }
   #frame .content .message-input {
     position: absolute;
-    bottom: 0;
+    bottom: -5px;
     width: 100%;
     z-index: 99;
   }
@@ -615,8 +615,8 @@ body {
     font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
     float: left;
     border: none;
-    width: calc(100% - 90px);
-    padding: 11px 32px 10px 8px;
+    width: calc(100% - 60px);
+    padding: 11px 32px 12px 8px;
     font-size: 1.8em;
     color: #32465a;
   }
@@ -650,7 +650,7 @@ body {
   #frame .content .message-input .wrap button {
     float: right;
     border: none;
-    width: 50px;
+    width: 60px;
     height: 50px;
     padding: 12px 0;
     cursor: pointer;
@@ -730,4 +730,11 @@ small {
 }
 .ant-modal-wrap.user-password-modal{
   z-index : 1009;
+}
+
+.list-group-flush .list-group-item:first-child {
+    border-top: 0;
+}
+.ant-modal-wrap h2, .ant-modal-wrap li, .ant-modal-wrap label,.ant-modal-wrap input, .ant-modal-wrap button{
+  font-family: proxima-nova, "Source Sans Pro", sans-serif;
 }

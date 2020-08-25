@@ -7,6 +7,7 @@ import {getHttpClient} from "../common/http_client";
 import {HOST_URL} from "../settings";
 import {closeChatUsersListPopup, closeUserPasswordPopup, openUserPasswordPopup} from "../store/actions/nav";
 import {deleteUser, updatedUser} from "../store/actions/message";
+import ReactTooltip from "react-tooltip";
 
 
 class ChatUsersListModal extends React.Component {
@@ -68,14 +69,14 @@ class ChatUsersListModal extends React.Component {
     };
 
     renderActivationButton = (user) => {
-        if (this.props.isStaff === true) {
+        if (this.canUserEditUser(user)) {
             return (<button type="button" className={user.is_active ? `btn btn-success` : `btn btn-warning`}
                             onClick={() => this.toggleUserActivation(user)}>{user.is_active ? `Active` : `Disabled`}</button>)
         }
     };
 
     renderAssignRoleDropdown = (user) => {
-        if (this.props.isStaff === true) {
+        if (this.canUserEditUser(user)) {
             return (
                 <div className="btn-group btn-group-sm" role="group">
                     <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -87,26 +88,48 @@ class ChatUsersListModal extends React.Component {
                     </div>
                 </div>
             )
+        } else {
+            return (
+                <div className="btn-group btn-group-sm" role="group">
+                    <button className="btn btn-secondary" type="button" id="dropdownMenuButton">{getUserRole(user)}</button>
+                </div>
+            );
         }
     };
+
+    canUserEditUser(user){
+        if (this.props.isAdmin === true){
+            return !user.is_admin
+        }
+        if (this.props.isStaff){
+            return !user.is_admin && !user.is_staff
+        }
+        return false
+    }
 
     renderUserList() {
         if (this.props.activeChat !== null) {
             let users = this.props.activeChat.participants.map(p => {
                 return (
-                    <li key={p.id}>{p.username}
+                    <li key={p.id} className="list-group-item">
+                        <span data-tip data-for={'mb'+p.id}>{p.username}</span>
+                        <ReactTooltip id={'mb'+p.id} type='info' place="right" effect='solid'>
+                          <span>Username: {p.first_name}</span>
+                            <br/>
+                          <span>Comment: {p.last_name}</span>
+                        </ReactTooltip>
                         <div className="btn-group btn-group-sm pull-right" role="group" aria-label="...">
                             {this.renderAssignRoleDropdown(p)}
-                            {this.props.isStaff ? (
+                            {this.canUserEditUser(p) ? (
                                 <button type="button" className="btn btn-light" onClick={() => this.props.openUserPasswordPopup(p)}>Password</button>) : null}
                             {this.renderActivationButton(p)}
-                            {this.props.isStaff ? (
+                            {this.canUserEditUser(p) ? (
                                 <button type="button" className="btn btn-danger" onClick={() => this.deleteUser(p)}>Delete</button>) : null}
                         </div>
                     </li>
                 );
             });
-            return (<ul>{users}</ul>);
+            return (<ul className="list-group list-group-flush">{users}</ul>);
         }
     }
 

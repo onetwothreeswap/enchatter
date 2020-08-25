@@ -7,7 +7,7 @@ import Circle from "../components/Circle";
 import * as messageActions from "../store/actions/message";
 import {HOST_URL} from "../settings";
 import {getHttpClient} from "../common/http_client";
-
+import ReactTooltip from "react-tooltip";
 
 class Chat extends React.Component {
     state = {message: "", fetchingNewMessages: false, pageNum: 0};
@@ -55,7 +55,10 @@ class Chat extends React.Component {
                 style={{marginBottom: arr.length - 1 === i ? "300px" : "15px"}}
                 className={message.author === currentUser ? "sent" : "replies"}
             >
-                <Circle username={message.author} size={42}/>
+                <Circle username={message.author} size={42} id={`tt`+message.id}/>
+                <ReactTooltip id={'tt'+message.id} type='light' place="bottom" effect='solid'>
+                  <span>{message.author} </span>
+                </ReactTooltip>
                 <p>
                     {message.content}
                     {this.renderDeleteButton(message.id)}
@@ -179,7 +182,6 @@ class Chat extends React.Component {
                                 type="text"
                                 placeholder="Write your message..."
                             />
-                            <i className="fa fa-paperclip attachment" aria-hidden="true"/>
                             <button id="chat-message-submit" className="submit">
                                 <i className="fa fa-paper-plane" aria-hidden="true"/>
                             </button>

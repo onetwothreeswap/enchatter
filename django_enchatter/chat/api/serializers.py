@@ -40,3 +40,16 @@ class MessagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = ("id",)
+
+
+class AdminContactSerializer(ContactSerializer):
+    first_name = serializers.CharField(source="user.first_name")
+    last_name = serializers.CharField(source="user.last_name")
+
+    class Meta:
+        model = Contact
+        fields = ('username', 'id', 'is_staff', 'is_admin', 'is_active', 'first_name', 'last_name')
+
+
+class AdminChatSerializer(ChatSerializer):
+    participants = AdminContactSerializer(many=True)

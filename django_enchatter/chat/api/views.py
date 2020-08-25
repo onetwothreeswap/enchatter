@@ -13,14 +13,18 @@ from rest_framework.viewsets import GenericViewSet
 from chat.models import Chat, Contact, Message
 from chat.views import get_user_contact
 from enchatter.permisions import IsStaffOrAdminLaddered
-from .serializers import ChatSerializer, MessagesSerializer
+from .serializers import ChatSerializer, MessagesSerializer, AdminChatSerializer
 
 User = get_user_model()
 
 
 class ChatListView(ListAPIView):
-    serializer_class = ChatSerializer
     permission_classes = (permissions.AllowAny,)
+
+    def get_serializer_class(self):
+        if self.request.user.is_staff:
+            return AdminChatSerializer
+        return ChatSerializer
 
     def get_queryset(self):
         contact = get_user_contact(self.request.user)

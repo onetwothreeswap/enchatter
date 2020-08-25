@@ -15,7 +15,7 @@ const Circle = (props) => {
         width: props.size,
         height: props.size,
         fontSize: parseInt(props.size/1.5)+`px`};
-    return (<div className="circle" style={style}>{username}</div>)
+    return (<div className="circle" style={style} data-tip data-for={props.id}>{username}</div>)
 };
 
 export default Circle;

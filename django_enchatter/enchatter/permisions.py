@@ -3,7 +3,7 @@ from rest_framework import permissions
 
 class IsStaffOrAdminLaddered(permissions.BasePermission):
     """
-    Object-level permission to onlu allow staff to edit users objects
+    Object-level permission to only allow staff to edit users objects
     and admins to edit users and staff objects.
     """
 

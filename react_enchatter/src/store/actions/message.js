@@ -61,8 +61,7 @@ export const getUserChats = (username, token) => {
       "Content-Type": "application/json",
       Authorization: `Token ${token}`
     };
-    axios
-      .get(`${HOST_URL}/chat/`)
+    axios.get(`${HOST_URL}/api/chat/`)
       .then(res => dispatch(getUserChatsSuccess(res.data)));
   };
 };

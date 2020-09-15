@@ -36,8 +36,7 @@ class HorizontalAddChatForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         const combined = [...usernames, this.props.username];
-        getHttpClient().axios
-          .post(`${HOST_URL}/chat/create/`, {
+        getHttpClient().post(`${HOST_URL}/api/chat/create/`, {
             messages: [],
             participants: combined
           })

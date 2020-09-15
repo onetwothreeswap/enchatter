@@ -2,6 +2,7 @@ from django.conf.urls import url
 from django.urls import path, include
 from rest_auth.views import LogoutView, UserDetailsView, PasswordChangeView
 from rest_framework import routers
+from rest_framework.routers import SimpleRouter
 
 from authorization.views import RegisterView, InviteCreateView, LoginView, AdminUserViewSet
 from chat.api.views import AdminMessagesViewSet
@@ -24,10 +25,14 @@ rest_registration_urls = [
     url(r'^create/$', InviteCreateView.as_view(), name='create_invite'),
 ]
 
-urlpatterns = [
+main_urlpatterns = [
     url(r'admin/', include((admin_router.urls, "admin"), namespace='admin')),
     path('api-auth/', include('rest_framework.urls')),
     path('chat/', include('chat.api.urls', namespace='chat')),
     path('rest-auth/', include(rest_auth_urls)),
     path('rest-auth/registration/', include(rest_registration_urls)),
+]
+
+urlpatterns = [
+    url(r'^api/', include(main_urlpatterns))
 ]

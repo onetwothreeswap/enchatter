@@ -31,7 +31,7 @@ class UserPasswordForm extends React.Component {
         if (this.props.user !== null) {
             data["user_id"] = this.props.user.id;
         }
-        getHttpClient().post(`${HOST_URL}/rest-auth/password/change/`, data
+        getHttpClient().post(`${HOST_URL}/api/rest-auth/password/change/`, data
         )
             .then(res => {
                 this.props.closeUserPasswordPopup();

@@ -12,7 +12,7 @@ import ReactTooltip from "react-tooltip";
 
 class ChatUsersListModal extends React.Component {
     deleteUser = (user) => {
-        getHttpClient().delete(`${HOST_URL}/admin/users/${user.id}/`)
+        getHttpClient().delete(`${HOST_URL}/api/admin/users/${user.id}/`)
             .then(res => {
                 this.props.deleteUser(user);
                 this.props.getUserChats(this.props.username, this.props.token);
@@ -26,7 +26,7 @@ class ChatUsersListModal extends React.Component {
 
     toggleUserActivation = (user) => {
         user.is_active = !user.is_active;
-        getHttpClient().patch(`${HOST_URL}/admin/users/${user.id}/`,
+        getHttpClient().patch(`${HOST_URL}/api/admin/users/${user.id}/`,
             {"is_active": user.is_active})
             .then(res => {
                 this.props.updateUser(user);
@@ -56,7 +56,7 @@ class ChatUsersListModal extends React.Component {
             user.is_superuser = true;
             params = {"is_staff": true, "is_superuser": true};
         }
-         getHttpClient().patch(`${HOST_URL}/admin/users/${user.id}/`, params)
+         getHttpClient().patch(`${HOST_URL}/api/admin/users/${user.id}/`, params)
             .then(res => {
                 this.props.updateUser(user);
                 this.props.getUserChats(this.props.username, this.props.token);

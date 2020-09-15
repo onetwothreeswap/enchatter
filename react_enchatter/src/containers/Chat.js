@@ -69,7 +69,7 @@ class Chat extends React.Component {
         ));
     };
     deleteMessage = (id) => {
-        getHttpClient().delete(`${HOST_URL}/admin/messages/${id}/`)
+        getHttpClient().delete(`${HOST_URL}/api/admin/messages/${id}/`)
             .then(res => {
                 this.props.deleteMessage(id);
             })

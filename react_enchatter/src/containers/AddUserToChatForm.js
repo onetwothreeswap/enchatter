@@ -16,15 +16,12 @@ class HorizontalAddUserToChatForm extends React.Component {
         inviteLink: ""
     };
 
-
     handleSubmit = e => {
         e.preventDefault();
 
-        getHttpClient().post(`${HOST_URL}/rest-auth/registration/create/`, {
-            username: e.target.username,
-            comment: e.target.comment,
-            is_staff: e.target.is_staff,
-            is_admin: e.target.is_admin,
+        getHttpClient().post(`${HOST_URL}/api/rest-auth/registration/create/`, {
+            username: e.target.username.value,
+            comment: e.target.comment.value,
             // TODO remove when multi chat is supported
             chat: 1,
         })
@@ -32,7 +29,6 @@ class HorizontalAddUserToChatForm extends React.Component {
                 this.setState({inviteLink: res.data.link});
             })
             .catch(err => {
-                console.error(err);
                 this.setState({
                     error: err.response.data
                 });
@@ -61,25 +57,9 @@ class HorizontalAddUserToChatForm extends React.Component {
                         {this.showError("comment")}
                     </div>
 
-                    {this.props.isStaff === true ? (
-                        <div className="checkbox">
-                            <label>
-                                <input className="form-check-input" type="checkbox" value="" id="is_staff"/> Is admin?
-                            </label>
-                        </div>
-                    ) : null}
-
-                    {this.props.isAdmin === true ? (
-                        <div className="checkbox">
-                            <label>
-                                <input className="form-check-input" type="checkbox" value="" id="is_admin"/> Is super admin?
-                            </label>
-                        </div>
-                    ) : null}
-
                     <button type="submit" className="btn btn-primary">Change</button>
                 </form>
-            ) : (<input type="text" value={this.state.inviteLink} disabled/>)
+            ) : (<input type="text" className="form-control" disabled value={this.state.inviteLink} disabled/>)
         );
     }
 }

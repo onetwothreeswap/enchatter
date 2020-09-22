@@ -59,7 +59,7 @@ class HorizontalAddUserToChatForm extends React.Component {
 
                     <button type="submit" className="btn btn-primary">Change</button>
                 </form>
-            ) : (<input type="text" className="form-control" disabled value={this.state.inviteLink} disabled/>)
+            ) : (<input type="text" className="form-control" disabled value={this.state.inviteLink}/>)
         );
     }
 }

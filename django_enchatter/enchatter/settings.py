@@ -90,8 +90,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'build/static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-# authentication settings
-
 SITE_ID = 1
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -119,7 +117,6 @@ HOST_URL = 'http://localhost:8000'
 FRONTEND_URL = "http:/localhost:3000"
 
 MESSAGES_PER_REQUEST = 10
-
 
 
 try:

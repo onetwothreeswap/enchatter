@@ -111,7 +111,7 @@ class WebSocketService {
     }
 
     fetchMessages(chatId, page = 0) {
-        this.sendEcnryptedMessage({
+        this.sendEncryptedMessage({
             command: "fetch_messages",
             chatId: chatId,
             page: page
@@ -119,7 +119,7 @@ class WebSocketService {
     }
 
     newChatMessage(message) {
-        this.sendEcnryptedMessage({
+        this.sendEncryptedMessage({
             command: "new_message",
             from: message.from,
             message: message.content,
@@ -141,7 +141,7 @@ class WebSocketService {
         }
     }
 
-    sendEcnryptedMessage(data) {
+    sendEncryptedMessage(data) {
         try {
             this.socketRef.send(this.encryptMessage(JSON.stringify({...data})));
         } catch (err) {

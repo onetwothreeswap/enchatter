@@ -98,8 +98,6 @@ export const authSignup = (username, password1, password2, key) => {
 };
 
 export const authCheckState = () => {
-
-
   return dispatch => {
     const token = localStorage.getItem("token");
     const username = localStorage.getItem("username");

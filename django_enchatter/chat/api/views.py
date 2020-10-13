@@ -8,9 +8,10 @@ from rest_framework.generics import (
     UpdateAPIView
 )
 from rest_framework.mixins import DestroyModelMixin
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
 
-from chat.models import Chat, Contact, Message
+from chat.models import Chat, Message
 from chat.views import get_user_contact
 from enchatter.permisions import IsStaffOrAdminLaddered
 from .serializers import ChatSerializer, MessagesSerializer, AdminChatSerializer
@@ -58,7 +59,7 @@ class ChatDeleteView(DestroyAPIView):
 
 class AdminMessagesViewSet(DestroyModelMixin,
                            GenericViewSet):
-    permission_classes = (IsStaffOrAdminLaddered,)
+    permission_classes = (IsAuthenticated, IsStaffOrAdminLaddered,)
     serializer_class = MessagesSerializer
     queryset = Message.objects.all()
 

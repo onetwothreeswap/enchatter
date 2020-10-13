@@ -1,6 +1,6 @@
 import base64
 
-from cryptography.fernet import Fernet
+from cryptography.fernet import Fernet, InvalidToken
 from django.contrib.auth import get_user_model
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
@@ -129,7 +129,7 @@ class ChatConsumer(WebsocketConsumer):
     def receive(self, text_data):
         try:
             text_data = self.decrypt_text(text_data)
-        except KeyError as e:
+        except (KeyError, InvalidToken) as e:
             pass
 
         data = json.loads(text_data)

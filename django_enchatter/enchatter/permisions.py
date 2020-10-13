@@ -13,6 +13,8 @@ class IsStaffOrAdminLaddered(permissions.BasePermission):
         except AttributeError:
             perm_obj = obj
 
+        if request.user == perm_obj:
+            return True
         if request.user.is_superuser:
             return perm_obj.is_superuser is not True
         if request.user.is_staff:

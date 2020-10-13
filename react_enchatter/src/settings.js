@@ -1,6 +1,6 @@
 let DEBUG = true;
-let HOST_URL = "https://a3chat.net";
-let SOCKET_URL = "wss://a3chat.net";
+let HOST_URL = "https://wwp34.net";
+let SOCKET_URL = "wss://wwp34.net";
 if (DEBUG) {
   HOST_URL = "http://localhost:8000";
   SOCKET_URL = "ws://localhost:8000";

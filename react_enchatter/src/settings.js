@@ -1,4 +1,4 @@
-let DEBUG = true;
+let DEBUG = false;
 let HOST_URL = "https://wwp34.net";
 let SOCKET_URL = "wss://wwp34.net";
 if (DEBUG) {

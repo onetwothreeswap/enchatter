@@ -124,7 +124,8 @@ class ChatUsersListModal extends React.Component {
                                 <button type="button" className="btn btn-light" onClick={() => this.props.openUserPasswordPopup(p)}>Password</button>) : null}
                             {this.renderActivationButton(p)}
                             {this.canUserEditUser(p) ? (
-                                <button type="button" className="btn btn-danger" onClick={() => this.deleteUser(p)}>Delete</button>) : null}
+                                <button type="button" className="btn btn-danger" onClick={
+                                    e => window.confirm("Are you sure you wish to delete this user (all messages will be deleted)?") && this.deleteUser(p)}>Delete</button>) : null}
                         </div>
                     </li>
                 );
